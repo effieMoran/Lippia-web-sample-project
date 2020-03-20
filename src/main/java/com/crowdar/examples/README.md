@@ -23,7 +23,7 @@ And search a Car using Chicago as a location and complete the form.
 @Test 
 Scenario: As a web user I want to navigate PHPTravel and search a Car between two days. 
 Given The user is in Cars page 
-When The user search a car betwteen two days 
+When The user search a car between two days 
 Then The search page list the available cars in those days. 
  
 @Test 
