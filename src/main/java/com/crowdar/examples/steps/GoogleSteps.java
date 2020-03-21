@@ -2,8 +2,8 @@ package com.crowdar.examples.steps;
 
 import com.crowdar.core.Injector;
 import com.crowdar.core.PageSteps;
-import com.crowdar.examples.pages.GoogleHomePage;
-import com.crowdar.examples.pages.GoogleSearchResultPage;
+import com.crowdar.examples.pages.google.GoogleHomePage;
+import com.crowdar.examples.pages.google.GoogleSearchResultPage;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -24,8 +24,8 @@ public class GoogleSteps extends PageSteps {
     }
 
     @Then("The client verify that results are shown properly")
-    public void statVerfication() {
-        Assert.assertTrue(!Injector._page(GoogleSearchResultPage.class).getStats().isEmpty());
+    public void statVerification() {
+        Assert.assertFalse(Injector._page(GoogleSearchResultPage.class).getStats().isEmpty());
 
     }
 }

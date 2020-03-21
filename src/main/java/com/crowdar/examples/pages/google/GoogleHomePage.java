@@ -1,4 +1,4 @@
-package com.crowdar.examples.pages;
+package com.crowdar.examples.pages.google;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.RemoteWebDriver;

@@ -1,4 +1,4 @@
-package com.crowdar.examples.pages;
+package com.crowdar.examples.pages.phptravel;
 
 import com.crowdar.core.pageObjects.PageBaseWeb;
 import org.openqa.selenium.remote.RemoteWebDriver;

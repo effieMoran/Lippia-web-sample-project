@@ -2,14 +2,12 @@ package com.crowdar.examples.steps;
 
 import com.crowdar.core.Injector;
 import com.crowdar.core.PageSteps;
-import com.crowdar.examples.pages.PHPTravelAboutUs;
-import com.crowdar.examples.pages.PHPTravelCarsPage;
-import com.crowdar.examples.pages.PHPTravelHomePage;
-import cucumber.api.java.en.And;
+import com.crowdar.examples.pages.phptravel.PHPTravelAboutUs;
+import com.crowdar.examples.pages.phptravel.PHPTravelCarsPage;
+import com.crowdar.examples.pages.phptravel.PHPTravelHomePage;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.openqa.selenium.By;
 import org.testng.Assert;
 
 /**
@@ -24,20 +22,18 @@ public class PHPTravelSteps extends PageSteps {
 
     @When("The user go to (.*) page")
     public void search(String pageName) {
-        Injector._page(PHPTravelHomePage.class).clickButton(pageName);
-        //Injector._page(PHPTravelHomePage.class).clickSearchButton();
+        Injector._page(PHPTravelHomePage.class).clickElementToRedirectByPageTitle(pageName.replace("\"",""));
 
     }
 
     @Then("The (.*) page is displayed")
-    public void statVerification(String pageName) {
-        Assert.assertTrue(!Injector._page(PHPTravelAboutUs.class).getWebElement(By.xpath("//div[contains(text(), " + pageName + ")]")).isDisplayed());
+    public void aboutUsVerification(String pageName) {
+        Assert.assertTrue(Injector._page(PHPTravelAboutUs.class).getAboutUsHeader(pageName.replace("\"","")).isDisplayed());
     }
 
     @Given("The user is in Cars page")
-    public void carsPage() throws InterruptedException {
+    public void carsPage() {
         Injector._page(PHPTravelCarsPage.class).go();
-        Thread.sleep(200000);
     }
 
     @Then("The search page list the available cars in those days.")

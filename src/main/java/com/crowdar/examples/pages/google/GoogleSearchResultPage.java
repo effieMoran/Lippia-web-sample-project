@@ -1,14 +1,10 @@
-package com.crowdar.examples.pages;
+package com.crowdar.examples.pages.google;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class GoogleSearchResultPage extends PageBaseGoogle {
-
-    private WebElement stats() {
-        return getWebElement(By.id("resultStats"));
-    }
 
     public GoogleSearchResultPage(RemoteWebDriver driver) {
         super(driver);
@@ -19,4 +15,7 @@ public class GoogleSearchResultPage extends PageBaseGoogle {
         return stats().getText();
     }
 
+    private WebElement stats() {
+        return getWebElement(By.id("resultStats"));
+    }
 }
