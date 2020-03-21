@@ -22,13 +22,12 @@ public class PHPTravelSteps extends PageSteps {
 
     @When("The user go to (.*) page")
     public void search(String pageName) {
-        Injector._page(PHPTravelHomePage.class).clickElementToRedirectByPageTitle(pageName.replace("\"",""));
-
+        Injector._page(PHPTravelHomePage.class).clickElementToRedirectByPageTitle(pageName);
     }
 
     @Then("The (.*) page is displayed")
     public void aboutUsVerification(String pageName) {
-        Assert.assertTrue(Injector._page(PHPTravelAboutUs.class).getAboutUsHeader(pageName.replace("\"","")).isDisplayed());
+        Assert.assertTrue(Injector._page(PHPTravelAboutUs.class).getAboutUsHeader(pageName).isDisplayed());
     }
 
     @Given("The user is in Cars page")
