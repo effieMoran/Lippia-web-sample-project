@@ -42,7 +42,8 @@ public class PHPTravelSteps extends PageSteps {
 
     @When("The user search a car between two days")
     public  void searchCarBetweenTwoDays(){
-
+        Injector._page(PHPTravelHomePage.class).clickCarsSearch();
+        Injector._page(PHPTravelHomePage.class).selectADateAfter();
     }
 
     @When("The user select the first result in the list")
@@ -50,7 +51,7 @@ public class PHPTravelSteps extends PageSteps {
 
     }
     @When("The user complete the booking car form")
-    public void completeCarBookin() {
+    public void completeCarBooking() {
 
     }
     @When("The user complete the payment form <payment data provided below>")
