@@ -61,9 +61,8 @@ public class PHPTravelHomePage extends PageBasePHPTravel {
 
         clickElementWithFluentWait(By.xpath(FIRST_DROP_OFF_LOCATION_XPATH));
 
-        //clickElementWithFluentWait(By.xpath(SEARCH_BUTTON_XPATH));
-        //WebElement searchButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(SEARCH_BUTTON_XPATH)));
-        //searchButton.click();
+        WebElement searchButton = driver.findElement(By.xpath(SEARCH_BUTTON_XPATH));
+        searchButton.submit();
     }
 
     /**
