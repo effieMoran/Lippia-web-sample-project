@@ -13,20 +13,31 @@ import java.time.format.DateTimeFormatter;
  */
 public class PHPTravelHomePage extends PageBasePHPTravel {
 
-    private final String DROP_OFF_LABEL = "dropoffdate";
+    private String DROP_OFF_LABEL = "dropoffdate";
+
+    private String CARS_TAB_XPATH = "//a[@data-name=\"cars\"]";
+
+    private String PICK_UP_LOCATION_XPATH = "//span[contains(text(),'Pick up')]";
+
+    private String CITY_NAME = "Chicago";
+
+    private String PICK_UP_LOCATION_INPUT_XPATH = "//*[@id='select2-drop']/div/input";
+
+    private String FIRST_DROP_OFF_LOCATION_XPATH = "//span[contains(text(),'Chicago')][1]";
+
+    private String SEARCH_BUTTON_XPATH = "//button[contains(text(),'Search')]";
+
     public PHPTravelHomePage(RemoteWebDriver driver) {
         super(driver);
-        this.url = ""; //here you can define the custom paths For example:"/search" --> www.googe.com/search
+        this.url = "";
     }
 
     public void go() {
         navigateToCompleteURL();
     }
 
-
     public void clickCarsSearch() {
-        //clickElement(By.xpath("//a[@data-name=\"cars\"]"));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@data-name=\"cars\"]")));
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(CARS_TAB_XPATH)));
         element.click();
     }
 
@@ -43,11 +54,24 @@ public class PHPTravelHomePage extends PageBasePHPTravel {
         String formattedDate = dropOffDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         completeField(element, formattedDate);
 
-        // How to complete Chicago
-        WebElement city = driver.findElement(By.className("select2-match"));
-        clickElement(city);
-        completeField(city, "Chicago");
+        clickElementWithFluentWait(By.xpath(PICK_UP_LOCATION_XPATH));
 
-        clickElement(By.linkText("Search"));
+        WebElement pickUpLocationInput =  wait.until(ExpectedConditions.elementToBeClickable(By.xpath(PICK_UP_LOCATION_INPUT_XPATH)));
+        completeField(pickUpLocationInput, CITY_NAME);
+
+        clickElementWithFluentWait(By.xpath(FIRST_DROP_OFF_LOCATION_XPATH));
+
+        //clickElementWithFluentWait(By.xpath(SEARCH_BUTTON_XPATH));
+        //WebElement searchButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(SEARCH_BUTTON_XPATH)));
+        //searchButton.click();
+    }
+
+    /**
+     *  Avoidede clickElement(By locator) of Lippia framework due to conflicts with javascript code
+     * @param locator
+     */
+    private void clickElementWithFluentWait(By locator) {
+        WebElement webElement = wait.until(ExpectedConditions.elementToBeClickable(locator));
+        webElement.click();
     }
 }
