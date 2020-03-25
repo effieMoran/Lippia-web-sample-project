@@ -10,6 +10,8 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.testng.Assert;
 
+import java.util.Map;
+
 /**
  * Created by Eli on 19/3/2020.
  */
@@ -54,11 +56,11 @@ public class PHPTravelSteps extends PageSteps {
     public void completeCarBooking() {
         Injector._page(PHPTravelCarsPage.class).completeUserData();
     }
-    @When("The user complete the payment form <payment data provided below>")
-    public void completePaymentForm() {
-
+    @When("The user complete the payment form (.*)")
+    public void completePaymentForm(String name, Map<String, String> creditCardData) {
+        Injector._page(PHPTravelCarsPage.class).completePaymentData(creditCardData);
     }
-    @Then("A reservation number is provided")
+    @Then("A reservation number is provided$")
     public void reservationNumberVerification() {
 
     }

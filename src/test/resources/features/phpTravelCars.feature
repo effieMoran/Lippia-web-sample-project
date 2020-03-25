@@ -18,5 +18,9 @@ Feature: Initial page
     When The user search a car between two days
     And The user select the first result in the list
     And The user complete the booking car form
-    And The user complete the payment form <payment data provided below>
+    And The user complete the payment form <creditCardData>
+      | Credit card | Visa             |
+      | Number      | 4263982640269299 |
+      | Exp Date    | 02/2023          |
+      | CVV         | 837              |
     Then A reservation number is provided

@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.util.Map;
+
 public class PHPTravelCarsPage extends PageBasePHPTravel {
 
     public PHPTravelCarsPage(RemoteWebDriver driver) {
@@ -30,26 +32,26 @@ public class PHPTravelCarsPage extends PageBasePHPTravel {
     }
 
     public void completeUserData() {
-        completeField(By.id("ct_firstname"), "John");
-        completeField(By.id("ct_surname"), "Doe");
-        completeField(By.id("ct_email_address"), "justanemail@gmail.com");
-        completeField(By.id("ct_email_address_confirm"), "justanemail@gmail.com");
-        completeField(By.id("ct_phone_no"), "12345678");
+        completeElement(By.id("ct_firstname"), "John");
+        completeElement(By.id("ct_surname"), "Doe");
+        completeElement(By.id("ct_email_address"), "justanemail@gmail.com");
+        completeElement(By.id("ct_email_address_confirm"), "justanemail@gmail.com");
+        completeElement(By.id("ct_phone_no"), "12345678");
+        completeElement(By.id("ct_city"), "Chicago");
+        completeElement(By.id("ct_address_1"), "Baker st. 856");
 
-        WebElement city = wait.until(ExpectedConditions.elementToBeClickable(By.id("ct_city")));
-        city.clear();
-        city.sendKeys("Chicago");
+        WebElement confirmReservationButton = driver.findElement(By.xpath("//*[@id=\"ct_frm_step3\"]/div[1]/div[4]/div/span"));
+        confirmReservationButton.submit();
+        System.out.println();
+    }
 
-        WebElement emailAddress = wait.until(ExpectedConditions.elementToBeClickable(By.id("ct_address_1")));
+    private void completeElement(By locator, String value) {
+        WebElement emailAddress = wait.until(ExpectedConditions.elementToBeClickable(locator));
         emailAddress.clear();
-        emailAddress.sendKeys("Baker st.");
+        emailAddress.sendKeys(value);
+    }
 
-        WebElement agreeButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"ct_s3_assurance_select_txt\"]/span/i")));
-        agreeButton.submit();
-
-        clickElement(By.id("ct_s3_insurance_select"));
-        clickElement(By.linkText("California"));
-        clickElement(By.linkText("Confirm reservation"));
+    public void completePaymentData(Map<String, String> creditCardInformation) {
 
     }
 }
