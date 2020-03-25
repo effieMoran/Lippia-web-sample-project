@@ -48,11 +48,11 @@ public class PHPTravelSteps extends PageSteps {
 
     @When("The user select the first result in the list")
     public void selectTheFirstResult() {
-
+        Injector._page(PHPTravelCarsPage.class).selectFirstCar();
     }
     @When("The user complete the booking car form")
     public void completeCarBooking() {
-
+        Injector._page(PHPTravelCarsPage.class).completeUserData();
     }
     @When("The user complete the payment form <payment data provided below>")
     public void completePaymentForm() {
