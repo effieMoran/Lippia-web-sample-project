@@ -37,7 +37,7 @@ public class PHPTravelSteps extends PageSteps {
 
     @Then("The search page list the available cars in those days.")
     public void verifySearchList() {
-
+        Assert.assertFalse(Injector._page(PHPTravelCarsPage.class).getCarsLegend().isEmpty());
     }
 
     @When("The user search a car between two days")

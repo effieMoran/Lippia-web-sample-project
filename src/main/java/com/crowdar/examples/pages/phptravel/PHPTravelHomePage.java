@@ -74,8 +74,6 @@ public class PHPTravelHomePage extends PageBasePHPTravel {
         //searchButton.submit();
 
         walkArourd(pickUpDate, dropOffDate);
-
-        System.out.println();
     }
 
     private void walkArourd(LocalDate pickUpDate, LocalDate dropOffDate) {
