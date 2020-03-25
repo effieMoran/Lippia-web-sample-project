@@ -46,13 +46,21 @@ public class PHPTravelHomePage extends PageBasePHPTravel {
     }
 
     public void selectADateAfter() {
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.name(DROP_OFF_LABEL)));
-        element.click();
+        WebElement dropOffDatePicker = wait.until(ExpectedConditions.elementToBeClickable(By.name(DROP_OFF_LABEL)));
+        dropOffDatePicker.click();
 
-        LocalDate dropOffDate = LocalDate.now();
-        dropOffDate = dropOffDate.plusDays(2);
-        String formattedDate = dropOffDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        completeField(element, formattedDate);
+        WebElement pickUpDateDatePicker = wait.until(ExpectedConditions.elementToBeClickable(By.name("pickupdate")));
+        pickUpDateDatePicker.click();
+
+        LocalDate pickUpDate = LocalDate.now();
+        pickUpDate = pickUpDate.plusDays(1);
+        LocalDate dropOffDate = pickUpDate.plusDays(2);
+
+        String pickUpFormattedDate = pickUpDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        completeField(pickUpDateDatePicker, pickUpFormattedDate);
+
+        String dropOffFormattedDate = dropOffDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        completeField(dropOffDatePicker, dropOffFormattedDate);
 
         clickElementWithFluentWait(By.xpath(PICK_UP_LOCATION_XPATH));
 
@@ -61,8 +69,22 @@ public class PHPTravelHomePage extends PageBasePHPTravel {
 
         clickElementWithFluentWait(By.xpath(FIRST_DROP_OFF_LOCATION_XPATH));
 
-        WebElement searchButton = driver.findElement(By.xpath(SEARCH_BUTTON_XPATH));
-        searchButton.submit();
+        //clickElement(By.xpath(SEARCH_BUTTON_XPATH));
+        //WebElement searchButton = driver.findElement(By.xpath(SEARCH_BUTTON_XPATH));
+        //searchButton.submit();
+
+        walkArourd(pickUpDate, dropOffDate);
+
+        System.out.println();
+    }
+
+    private void walkArourd(LocalDate pickUpDate, LocalDate dropOffDate) {
+        driver.get("https://phptravels.net/car?startlocation=Chicago+-+North+%28illinois%29&endlocation=Chicago+-+North+%28illinois%29&pickupLocationId=159768&returnLocationId=159768&clientId=741882&residencyId=US&pickupDateTime=" +
+                pickUpDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))+
+                "T10%3A00&returnDateTime=" +
+                dropOffDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))+
+                "T10%3A00" +
+                "&currency=USD#book");
     }
 
     /**
