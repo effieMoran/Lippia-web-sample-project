@@ -53,7 +53,7 @@ public class PHPTravelHomePage extends PageBasePHPTravel {
         pickUpDateDatePicker.click();
 
         LocalDate pickUpDate = LocalDate.now();
-        pickUpDate = pickUpDate.plusDays(1);
+        pickUpDate = pickUpDate.plusDays(2);
         LocalDate dropOffDate = pickUpDate.plusDays(2);
 
         String pickUpFormattedDate = pickUpDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
@@ -64,7 +64,7 @@ public class PHPTravelHomePage extends PageBasePHPTravel {
 
         clickElementWithFluentWait(By.xpath(PICK_UP_LOCATION_XPATH));
 
-        WebElement pickUpLocationInput =  wait.until(ExpectedConditions.elementToBeClickable(By.xpath(PICK_UP_LOCATION_INPUT_XPATH)));
+        WebElement pickUpLocationInput = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(PICK_UP_LOCATION_INPUT_XPATH)));
         completeField(pickUpLocationInput, CITY_NAME);
 
         clickElementWithFluentWait(By.xpath(FIRST_DROP_OFF_LOCATION_XPATH));
@@ -78,15 +78,16 @@ public class PHPTravelHomePage extends PageBasePHPTravel {
 
     private void walkArourd(LocalDate pickUpDate, LocalDate dropOffDate) {
         driver.get("https://phptravels.net/car?startlocation=Chicago+-+North+%28illinois%29&endlocation=Chicago+-+North+%28illinois%29&pickupLocationId=159768&returnLocationId=159768&clientId=741882&residencyId=US&pickupDateTime=" +
-                pickUpDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))+
+                pickUpDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) +
                 "T10%3A00&returnDateTime=" +
-                dropOffDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))+
+                dropOffDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) +
                 "T10%3A00" +
                 "&currency=USD#book");
     }
 
     /**
-     *  Avoidede clickElement(By locator) of Lippia framework due to conflicts with javascript code
+     * Avoidede clickElement(By locator) of Lippia framework due to conflicts with javascript code
+     *
      * @param locator
      */
     private void clickElementWithFluentWait(By locator) {

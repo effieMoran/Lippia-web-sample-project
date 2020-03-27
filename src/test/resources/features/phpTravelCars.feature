@@ -19,8 +19,9 @@ Feature: Initial page
     And The user select the first result in the list
     And The user complete the booking car form
     And The user complete the payment form <creditCardData>
-      | Credit card | Visa             |
-      | Number      | 4263982640269299 |
-      | Exp Date    | 02/2023          |
-      | CVV         | 837              |
+      | cardName        | Visa             |
+      | cardNumber      | 4263982640269299 |
+      | expiryDateMonth | 02 - Feb         |
+      | expiryDateYear  | 2023             |
+      | seriesCode      | 837              |
     Then A reservation number is provided
