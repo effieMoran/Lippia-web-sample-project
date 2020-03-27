@@ -1,11 +1,9 @@
 package com.crowdar.examples.pages.phptravel;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.Map;
 
@@ -42,7 +40,7 @@ public class PHPTravelCarsPage extends PageBasePHPTravel {
         completeElementWithFluentWait(By.id("ct_city"), "Chicago");
         completeElementWithFluentWait(By.id("ct_address_1"), "Baker st. 856");
 
-        WebElement confirmReservationButton = driver.findElement(By.xpath("//*[@id=\"ct_frm_step3\"]/div[1]/div[4]/div/span"));
+        WebElement confirmReservationButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"ct_frm_step3\"]/div[1]/div[4]/div/span")));
         confirmReservationButton.submit();
         System.out.println();
     }
@@ -54,6 +52,7 @@ public class PHPTravelCarsPage extends PageBasePHPTravel {
     }
 
     public void completePaymentData(Map<String, String> creditCardInformation) {
+
         WebElement frame = wait.until(ExpectedConditions.visibilityOfElementLocated((By
                 .xpath("//*[@id=\"ct_box_Insurance_wrapper\"]/div[2]/iframe"))));
         wait.until(ExpectedConditions.visibilityOfAllElements(frame));
